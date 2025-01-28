@@ -40,32 +40,38 @@ const Login = () => {
     formState: { errors },
   } = useForm<FieldValues>();
 
+  
   const handleLogin: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = "login-toast";
     try {
       const res = await login(data).unwrap();
       const user = verifyToken(res.data);
       dispatch(setUser({ token: res.data, user }));
-      toast.success("Logged in successfully");
+      toast.success("Logged in successfully", { id: toastId });
       navigate("/");
     } catch (err: any) {
-      toast.error(err?.data?.message || "Something went wrong");
+      toast.error(err?.data?.message || "Something went wrong", {
+        id: toastId,
+      });
     }
   };
 
-
   const handleRegister: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = "register-toast";
     try {
       await register(data).unwrap();
-      toast.success("Registered successfully. Please Login now.");
+      toast.success("Registered successfully. Please Login now.", {
+        id: toastId,
+      });
       navigate("/login");
       setTab("login");
       dispatch(logout());
     } catch (err: any) {
-      toast.error(err?.data?.message || "Something went wrong");
+      toast.error(err?.data?.message || "Something went wrong", {
+        id: toastId,
+      });
     }
   };
-  
-  
 
   if (user) {
     return <Navigate to="/" />;
@@ -233,7 +239,7 @@ const Login = () => {
                 </div>
                 <div className="relative mb-4">
                   <label className="block text-sm font-bold text-gray-700">
-                   City
+                    City
                   </label>
                   <Controller
                     name="city"

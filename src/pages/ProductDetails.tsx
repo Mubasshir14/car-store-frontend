@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import {
   useAddReviewMutation,
 } from "@/redux/features/Review/reviewManagementApi";
+import Review from "./Review";
 
 
 const ProductDetails = () => {
@@ -68,7 +69,6 @@ const ProductDetails = () => {
         console.log("Cart item added successfully:", response);
         toast.success("Item added to cart successfully!");
       } catch (error) {
-        console.error("Failed to add item to cart:", error);
         toast.error("Failed to add item to cart. Please try again.");
       }
     }

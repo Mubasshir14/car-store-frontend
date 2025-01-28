@@ -23,6 +23,7 @@ import AdminProductDetails from "@/pages/AdminProductDetails";
 import TermsConditions from "@/pages/TermsConditions";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Payment from "@/pages/Payment";
+import TrackOrder from "@/User/TrackOrder";
 
 const router = createBrowserRouter([
   {
@@ -57,14 +58,14 @@ const router = createBrowserRouter([
         path: "/car/:id",
         element: <ProductDetails />,
       },
-      {
-        path: "/order/:id",
-        element: (
-          <ProtectedRoute>
-            <OrderDetails />
-          </ProtectedRoute>
-        ),
-      },
+      // {
+      //   path: "/order/:id",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <OrderDetails />
+      //     </ProtectedRoute>
+      //   ),
+      // },
       {
         path: "/my-profile",
         element: (
@@ -141,6 +142,14 @@ const router = createBrowserRouter([
       {
         path: "verification",
         element: <Orderverification />,
+      },
+      {
+        path: "order/:id",
+        element: <OrderDetails />,
+      },
+      {
+        path: "order/track-order",
+        element: <TrackOrder />,
       },
     ],
   },

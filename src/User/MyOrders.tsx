@@ -17,8 +17,7 @@ const MyOrders = () => {
     (order: any) => order.status === "Paid"
   );
 
-  if (isLoading) <Loader/>
-
+  if (isLoading) <Loader />;
 
   const columns = [
     {
@@ -54,7 +53,18 @@ const MyOrders = () => {
       dataIndex: "totalPrice",
       key: "totalPrice",
       render: (_: any, record: any) =>
-        `$${record.cars.reduce((acc: number, car: any) => acc + car.totalPrice, 0)}`,
+        `$${record.cars.reduce(
+          (acc: number, car: any) => acc + car.totalPrice,
+          0
+        )}`,
+    },
+    {
+      title: "Order ID",
+      dataIndex: "id",
+      key: "id",
+      render: (_: any, record: any) => (
+        <Text>{record._id}</Text>
+      ),
     },
     {
       title: "Order Status",
@@ -80,7 +90,7 @@ const MyOrders = () => {
       dataIndex: "actions",
       key: "actions",
       render: (_: any, record: any) => (
-        <Link to={`/order/${record._id}`}>
+        <Link to={`/user-dashboard/order/${record._id}`}>
           <Button type="link">View Details</Button>
         </Link>
       ),

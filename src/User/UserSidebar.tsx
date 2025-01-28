@@ -6,8 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { logout, useCurrentUser } from "@/redux/features/auth/authSlice";
 import { useGetMeQuery } from "@/redux/features/Admin/userManagementApi";
 import { toast } from "sonner";
-import { MdDomainVerification } from "react-icons/md";
-
+import { CiDeliveryTruck } from "react-icons/ci";
 const UserSidebar = () => {
   const [isActive, setIsActive] = useState(false);
 
@@ -55,11 +54,23 @@ const UserSidebar = () => {
       name: "My Profile",
       icon: <User className="w-5 h-5" />,
     },
+
+    {
+      path: "/user-dashboard/order/track-order",
+      name: "Order Track",
+      icon: <CiDeliveryTruck className="w-5 h-5" />,
+    },
+    {
+      path: "/user-dashboard/order/:id",
+      // name: "Order Details",
+      // icon: <CiDeliveryTruck className="w-5 h-5" />,
+    },
     {
       path: "/user-dashboard/verification?",
-      name: "Verify Payment",
-      icon: <MdDomainVerification className="w-5 h-5" />,
+      // name: "Verify Payment",
+      // icon: <MdDomainVerification className="w-5 h-5" />,
     },
+
   ];
 
   return (

@@ -46,11 +46,9 @@ const OrderVerification = () => {
           .unwrap()
           .then((cartResponse) => {
             console.log("Cart cleared:", cartResponse);
-            toast.success("Cart cleared successfully!");
           })
           .catch((cartError) => {
             console.error("Failed to clear cart:", cartError);
-            toast.error("Failed to clear cart");
           });
       })
       .catch((error) => {

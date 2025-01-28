@@ -115,18 +115,14 @@ const ManageCar: React.FC = () => {
     try {
       // Call deleteProduct mutation
       await deleteProduct(record._id).unwrap();
-      message.success(`${record.carName} deleted successfully!`, {
-        className: "bg-rose-500 text-white",
-      });
+      message.success(`${record.carName} deleted successfully!`);
     } catch (error) {
       console.log(error);
-      message.error("Failed to delete car. Please try again.", {
-        className: "bg-rose-500 text-white",
-      });
+      message.error("Failed to delete car. Please try again.");
     }
   };
 
-  const columns = [
+  const columns: any = [
     {
       title: "Image",
       dataIndex: "image",
@@ -194,7 +190,6 @@ const ManageCar: React.FC = () => {
           <Link
             to={`/dashboard/update-car/${record._id}`}
             type="text"
-            icon={<EditOutlined />}
             className="text-blue-500 hover:text-blue-700"
           >
             Update
@@ -218,7 +213,6 @@ const ManageCar: React.FC = () => {
           <Link
             to={`/car/${record._id}`}
             type="text"
-            icon={<EyeOutlined />}
             className="text-green-500 hover:text-green-700"
           >
             Details
@@ -230,7 +224,7 @@ const ManageCar: React.FC = () => {
 
   const dataSource =
     response?.data?.data?.map((item, index) => ({
-      key: index,
+      i: index,
       ...item,
     })) || [];
 

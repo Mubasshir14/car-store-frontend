@@ -85,7 +85,7 @@ const ManageUser: React.FC = () => {
         : "",
   });
 
-  const columns = [
+  const columns : any = [
     {
       title: "Name",
       dataIndex: "name",

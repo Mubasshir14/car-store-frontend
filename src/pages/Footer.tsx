@@ -7,12 +7,30 @@ import img from "../assets/Carizon.png";
 import { Link } from "react-router";
 
 const Footer = () => {
+  // const scrollToSection = (id: string) => {
+  //   const section = document.querySelector(id);
+  //   if (section) {
+  //     section.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
   return (
     <footer className="bg-black text-white py-10">
       <div className="max-w-screen-2xl mx-auto px-4 grid md:grid-cols-3 gap-8">
         <div>
-          {/* <h4 className="text-xl font-bold mb-4">Quick Links</h4> */}
-          <img src={img} alt="" />
+          <div className=" flex items-center gap-2">
+            <Link to="/">
+              <img src={img} alt="" />
+            </Link>
+            {/* <button
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("#nav");
+              }}
+              className="bg-red-500 btn btn-outline border-0 hover:bg-red-400 text-white"
+            >
+              <FaArrowAltCircleUp className="text-white" />
+            </button> */}
+          </div>
           <ul className="space-y-2 text-justify">
             Where quality meets reliability, offering top-notch <br /> vehicles
             and exceptional service to elevate your <br /> driving experience.
@@ -27,7 +45,7 @@ const Footer = () => {
             <Link to="/privacy-policy">
               <p className="hover:text-gray-300">Privacy Policy</p>
             </Link>
-            <Link to="/payment">
+            <Link to="/payment-policy">
               <p className="hover:text-gray-300">Payment Policy</p>
             </Link>
           </ul>

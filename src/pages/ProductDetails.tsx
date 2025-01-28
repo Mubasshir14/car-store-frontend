@@ -46,6 +46,13 @@ const ProductDetails = () => {
       toast.error("Please log in to add items to the cart.", {
         id: toastId,
       });
+      return
+    }
+    if (user?.role === "admin") {
+      toast.error("You are not allowed to add items to the cart. You are an admin.", {
+        id: toastId,
+      });
+      return; 
     }
     if (user) {
       const cartItem = {

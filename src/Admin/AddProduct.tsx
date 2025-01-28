@@ -27,16 +27,19 @@ const AddProduct = () => {
   const [addProduct, { isLoading }] = useAddProductMutation();
 
   const onSubmit = async (data: any) => {
-    console.log(data); 
+    console.log(data);
+    const toastId = "addProductToast";
     try {
       await addProduct(data).unwrap();
       toast.success("Product added successfully!", {
         className: "bg-emerald-500 text-white",
+        id: toastId,
       });
       reset();
     } catch (error) {
       toast.error("Failed to add product. Please try again.", {
         className: "bg-rose-500 text-white",
+        id: toastId,
       });
       console.error("Error adding product:", error);
     }
@@ -53,7 +56,7 @@ const AddProduct = () => {
         <CardContent className="p-8 bg-white">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[ 
+              {[
                 { name: "brand", label: "Brand", type: "text" },
                 { name: "carName", label: "Car Name", type: "text" },
                 { name: "image", label: "Image URL", type: "text" },
@@ -192,6 +195,19 @@ const AddProduct = () => {
                   {errors.description?.message as string}
                 </span>
               )}
+            </div>
+
+            {/* Featured Checkbox */}
+            <div className="relative group">
+              <Label className="text-lg font-semibold text-gray-700 group-hover:text-rose-600 transition-colors flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="featured"
+                  className="w-5 h-5 border-2 border-gray-300 rounded focus:ring-rose-500 focus:border-rose-500 transition-all"
+                  {...register("featured")}
+                />
+                <span>Mark as Featured(Optional)</span>
+              </Label>
             </div>
 
             {/* Submit Button */}

@@ -24,6 +24,7 @@ const MyCart = () => {
     email: user?.email,
     role: user?.role,
   });
+  console.log(newUser);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const totalPrice = cart?.data
@@ -35,6 +36,7 @@ const MyCart = () => {
     .toFixed(2);
 
   const handleDelete = (itemId: string) => {
+    const toastId = "deleteCartToast";
     Modal.confirm({
       title: "Are you sure you want to delete this item?",
       content: "This action cannot be undone.",
@@ -43,11 +45,13 @@ const MyCart = () => {
       onOk: async () => {
         try {
           await deleteCart(itemId).unwrap();
-          toast.success("Removed from cart");
-          console.log("Deleted item with ID:", itemId);
+          toast.success("Removed from cart", {
+            id: toastId
+          });
         } catch (error) {
-          toast.error("Something went wrong");
-          console.error("Failed to delete item:", error);
+          toast.error("Something went wrong", {
+            id: toastId
+          });
         }
       },
       onCancel: () => {
@@ -58,65 +62,55 @@ const MyCart = () => {
 
   const handlePlaceOrder = async () => {
     try {
-      setIsProcessing(true); // Start loading state
-  
+      setIsProcessing(true); 
       console.log("Cart data:", cart?.data);
-
-  
-      // Adjust the payload to match the required structure
       const orderPayload = {
-        cars: cart?.data?.map((item: {
-          _id: string;
-          car: string;
-          quantity: number;
-          name: string;
-          brand: string;
-          category: string;
-          description: string;
-          fuelType: string;
-          image: string;
-          milage: string;
-          year: number;
-          userName: string;
-          email: string;
-          price: number;
-          address: string;
-          phone: string;
-          city: string;
-          totalPrice: number;
-         
-        }) => ({
-          car: item.car,        // Rename _id to car
-          _id: item._id,        // Original _id
-          quantity: item.quantity,
-          name: item.name,
-          brand: item.brand,
-          category: item.category,
-          description: item.description,
-          fuelType: item.fuelType,
-          image: item.image,
-          milage: item.milage,
-          year: item.year,
-          userName: item.userName,
-          email: item.email,
-          price: item.price,
-          address: item.address,
-          phone: item.phone,
-          city: item.city,
-          totalPrice: item.totalPrice,
-         
-        })),
+        cars: cart?.data?.map(
+          (item: {
+            _id: string;
+            car: string;
+            quantity: number;
+            name: string;
+            brand: string;
+            category: string;
+            description: string;
+            fuelType: string;
+            image: string;
+            milage: string;
+            year: number;
+            userName: string;
+            email: string;
+            price: number;
+            address: string;
+            phone: string;
+            city: string;
+            totalPrice: number;
+          }) => ({
+            car: item.car,
+            _id: item._id,
+            quantity: item.quantity,
+            name: item.name,
+            brand: item.brand,
+            category: item.category,
+            description: item.description,
+            fuelType: item.fuelType,
+            image: item.image,
+            milage: item.milage,
+            year: item.year,
+            userName: item.userName,
+            email: item.email,
+            price: item.price,
+            address: item.address,
+            phone: item.phone,
+            city: item.city,
+            totalPrice: item.totalPrice,
+          })
+        ),
       };
-      
-  
       console.log("Order payload:", orderPayload);
-  
-      // Send the order payload to the backend
       const response = await createOrder(orderPayload).unwrap();
-  
-      // Redirect the user to the payment page if successful
       if (response?.data) {
-        window.location.href = response.data; // Assuming response.data contains the checkout URL
+        window.location.href = response.data;
       } else {
         toast.error("Failed to retrieve payment link.");
       }
@@ -126,11 +120,9 @@ const MyCart = () => {
         error?.data?.message || "Failed to place the order. Please try again."
       );
     } finally {
-      setIsProcessing(false); // End loading state
+      setIsProcessing(false);
     }
   };
-  
-  
 
   if (isLoading || isProcessing) return <Loader />;
 

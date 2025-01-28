@@ -13,19 +13,23 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { useGetAProductQuery, useUpdateProductMutation } from "@/redux/features/Admin/productManagement.api";
+import {
+  useGetAProductQuery,
+  useUpdateProductMutation,
+} from "@/redux/features/Admin/productManagement.api";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "@/pages/Loader";
 import { useEffect } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const UpdateCar = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const { data: carData, isLoading: isLoadingCar } = useGetAProductQuery(id, {
     skip: !id,
   });
-  
+
   const [updateProduct, { isLoading: isUpdating }] = useUpdateProductMutation();
 
   const {
@@ -36,7 +40,6 @@ const UpdateCar = () => {
     formState: { errors },
   } = useForm();
 
-  // Set default values when carData is loaded
   useEffect(() => {
     if (carData?.data) {
       reset({
@@ -51,25 +54,29 @@ const UpdateCar = () => {
         category: carData.data.category,
         fuelType: carData.data.fuelType,
         description: carData.data.description,
+        featured: carData?.data?.featured,
       });
     }
   }, [carData, reset]);
 
   const onSubmit = async (formData: any) => {
+    const toastId = "updateCarToast";
     try {
       const updatedData = {
         ...carData?.data,
         ...formData,
       };
-      
+
       await updateProduct({ id, data: updatedData }).unwrap();
       toast.success("Car updated successfully!", {
         className: "bg-emerald-500 text-white",
+        id: toastId,
       });
-      navigate("/dashboard/manage-car"); 
+      navigate("/dashboard/manage-car");
     } catch (error) {
       toast.error("Failed to update car. Please try again.", {
         className: "bg-rose-500 text-white",
+        id: toastId,
       });
       console.error("Error updating car:", error);
     }
@@ -228,7 +235,29 @@ const UpdateCar = () => {
                 </span>
               )}
             </div>
+            <div className="relative group">
+              <Controller
+                name="featured"
+                control={control}
+                render={({ field }) => (
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="featured"
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="data-[state=checked]:bg-rose-500 data-[state=checked]:border-rose-500"
+                    />
 
+                    <Label
+                      htmlFor="featured"
+                      className="text-lg font-semibold text-gray-700 group-hover:text-rose-600 transition-colors"
+                    >
+                      Mark as Featured (Optional)
+                    </Label>
+                  </div>
+                )}
+              />
+            </div>
             {/* Submit Button */}
             <Button
               type="submit"

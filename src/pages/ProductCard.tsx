@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { BsFuelPump } from "react-icons/bs";
 import { FaArrowCircleRight, FaEye, FaTachometerAlt } from "react-icons/fa";
 import { GiGearStickPattern } from "react-icons/gi";
@@ -17,6 +17,7 @@ const ProductCard = ({ product }: { product: TProducts }) => {
     milage,
     _id,
   } = product as TProducts;
+  console.log(_id);
   const randomNumber = Math.floor(Math.random() * 50) + 1;
   return (
     <div className="card uppercase shadow-lg rounded-lg border border-gray-200 bg-white">
@@ -53,18 +54,18 @@ const ProductCard = ({ product }: { product: TProducts }) => {
           {/* Fuel Type */}
           <div className="flex flex-col pl-2">
             <div className="flex items-center gap-2 text-gray-900">
-              <BsFuelPump className="text-sm" />
+              <BsFuelPump className="text-xs" />
               <span>Fuel </span>
             </div>
-            <p className="font-medium mt-1 text-sm text-end">{fuelType || "PETROL"}</p>
+            <p className=" mt-1 text-xs text-end">{fuelType || "PETROL"}</p>
           </div>
           {/* Mileage */}
           <div className="flex flex-col pl-2 border-l border-gray-300">
             <div className="flex items-center gap-2 text-gray-900">
-              <FaTachometerAlt className="text-sm" />
+              <FaTachometerAlt className="text-xs" />
               <span>Mileage</span>
             </div>
-            <p className="font-medium mt-1 text-sm text-end">{milage || "92 MPG"}</p>
+            <p className=" mt-1 text-xs text-end">{milage || "92 MPG"}</p>
           </div>
           {/* Transmission */}
           <div className="flex flex-col pl-2 border-l border-gray-300">
@@ -72,7 +73,7 @@ const ProductCard = ({ product }: { product: TProducts }) => {
               <GiGearStickPattern className="text-xs" />
               <span>Transmission</span>
             </div>
-            <p className="font-medium mt-1 text-sm text-end">AUTO</p>
+            <p className=" mt-1 text-xs text-end">AUTO</p>
           </div>
         </div>
 
@@ -80,15 +81,15 @@ const ProductCard = ({ product }: { product: TProducts }) => {
 
         {/* Actions */}
         <div className="flex justify-between items-center">
-          <Link to={`/car/${product._id}`} className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-sm font-bold rounded-lg hover:bg-red-600 transition duration-200 uppercase">
+          <Link
+            to={`/car/${product._id}`}
+            className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-xs font-bold rounded-lg hover:bg-red-600 transition duration-200 uppercase"
+          >
             View Details <FaArrowCircleRight />
           </Link>
-          <button
-           
-            className="btn px-4 py-2 flex items-center text-sm font-bold  border-gray-300 hover:bg-gray-200 rounded-lg"
-          >
+          <button className="btn px-4 py-2 flex items-center text-xs font-bold  border-gray-300 hover:bg-gray-200 rounded-lg">
             {randomNumber}
-            <FaEye className="text-sm font-bold"/>
+            <FaEye className="text-xs font-bold" />
           </button>
         </div>
       </div>

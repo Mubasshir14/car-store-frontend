@@ -1,4 +1,5 @@
 export type TProducts = {
+  [x: string]: any;
   _id: string;
   image?: string;
   brand: string;

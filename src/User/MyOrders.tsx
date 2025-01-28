@@ -1,23 +1,27 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge, Button, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useGetOrderQuery } from "@/redux/features/Admin/orderManagementApi";
-import { useAppSelector } from "@/redux/hook";
-import { useCurrentUser } from "@/redux/features/auth/authSlice";
 import Loader from "@/pages/Loader";
 
 const { Title, Text } = Typography;
 
 const MyOrders = () => {
-  const user = useAppSelector(useCurrentUser);
   const { data: order, isLoading } = useGetOrderQuery(undefined);
 
-  const pendingOrders = order?.data?.filter(
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  const sortedOrders = [...(order?.data || [])]?.sort((a: any, b: any) => {
+    const dateA = new Date(a.updatedAt || a.createdAt);
+    const dateB = new Date(b.updatedAt || b.createdAt);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  const pendingOrders = sortedOrders?.filter(
     (order: any) => order.status === "Paid"
   );
-
-  if (isLoading) <Loader />;
 
   const columns = [
     {
@@ -59,12 +63,18 @@ const MyOrders = () => {
         )}`,
     },
     {
+      title: "Order Date",
+      dataIndex: "orderDate",
+      key: "orderDate",
+      render: (date: string) => (
+        <Text>{new Date(date).toLocaleDateString()}</Text>
+      ),
+    },
+    {
       title: "Order ID",
       dataIndex: "id",
       key: "id",
-      render: (_: any, record: any) => (
-        <Text>{record._id}</Text>
-      ),
+      render: (_: any, record: any) => <Text>{record._id}</Text>,
     },
     {
       title: "Order Status",
@@ -104,12 +114,12 @@ const MyOrders = () => {
     cars: order.cars,
     orderStatus: order.orderStatus,
     _id: order._id,
+    orderDate: order.updatedAt || order.createdAt,
   }));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
         <div className="flex items-center justify-between mb-8">
           <Title level={2} className="text-red-500">
             My Orders
@@ -123,7 +133,6 @@ const MyOrders = () => {
           </Badge>
         </div>
 
-        {/* Ant Design Table */}
         <Table
           dataSource={dataSource}
           columns={columns}

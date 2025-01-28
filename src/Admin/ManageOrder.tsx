@@ -10,21 +10,24 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const { Title } = Typography;
+console.log(Title);
 
 const ManageOrder = () => {
   const { data: order } = useGetAllOrdersQuery(undefined);
   const [updateOrderStatus] = useUpdateOrderStatusMutation();
 
   const handleStatusUpdate = async (id: string, status: string) => {
-    console.log(id);
+    const toastId = "updateOrderToast";
     try {
       await updateOrderStatus({ id, status }).unwrap();
       toast.success(`Order successfully ${status.toLowerCase()}`, {
         description: `Order #${id.slice(-6)} has been ${status.toLowerCase()}`,
+        id: toastId,
       });
     } catch (error) {
-      toast.error("Failed to update order status", {});
-      console.error("Failed to update order status:", error);
+      toast.error("Failed to update order status", {
+        id: toastId,
+      });
     }
   };
   const sortedOrders = order?.data
@@ -57,6 +60,7 @@ const ManageOrder = () => {
         return "default";
     }
   };
+  console.log(getOrderStatusColor);
 
   const columns = [
     {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import {
@@ -39,8 +39,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>();
+  console.log(errors);
 
-  
   const handleLogin: SubmitHandler<FieldValues> = async (data) => {
     const toastId = "login-toast";
     try {
@@ -128,7 +128,7 @@ const Login = () => {
                     render={({ field }) => (
                       <input
                         {...field}
-                        type="text"
+                        type="password"
                         className="block w-full px-3 py-2 mt-1 text-gray-700 bg-white border rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500"
                         placeholder="Enter your password"
                       />

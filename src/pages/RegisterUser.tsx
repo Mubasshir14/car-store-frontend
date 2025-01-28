@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, Controller, FieldValues } from "react-hook-form";
-import add from '../assets/address-svgrepo-com.svg'
+import add from "../assets/address-svgrepo-com.svg";
 const RegisterUser = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>();
-
+  console.log(errors);
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -177,7 +177,6 @@ const RegisterUser = () => {
                     d="M20 12c0 2.75-2.25 5-5 5s-5-2.25-5-5 2.25-5 5-5 5 2.25 5 5zM4 12c0 2.75 2.25 5 5 5s5-2.25 5-5-2.25-5-5-5-5 2.25-5 5z"
                   />
                 </svg>
-                
               </span>
 
               <Controller
@@ -196,7 +195,7 @@ const RegisterUser = () => {
 
             <div className="relative flex items-center mt-4">
               <span className="absolute">
-                <img src={add} className="w-6 h-6 mx-3 text-gray-300"  alt="" />
+                <img src={add} className="w-6 h-6 mx-3 text-gray-300" alt="" />
               </span>
 
               <Controller
@@ -215,7 +214,7 @@ const RegisterUser = () => {
 
             <div className="relative flex items-center mt-4">
               <span className="absolute">
-                <img src={add} className="w-6 h-6 mx-3 text-gray-300 "  alt="" />
+                <img src={add} className="w-6 h-6 mx-3 text-gray-300 " alt="" />
               </span>
 
               <Controller

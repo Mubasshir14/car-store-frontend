@@ -4,9 +4,7 @@ import React, { useState } from "react";
 import { Table, Input, Button, Space, Popconfirm, Image, message } from "antd";
 import {
   SearchOutlined,
-  EditOutlined,
   DeleteOutlined,
-  EyeOutlined,
 } from "@ant-design/icons";
 import Loader from "@/pages/Loader";
 import {
@@ -43,7 +41,9 @@ const ManageCar: React.FC = () => {
   const [deleteProduct] = useDeleteProductMutation();
 
   const [searchText, setSearchText] = useState<string>("");
+  console.log(searchText);
   const [searchedColumn, setSearchedColumn] = useState<string>("");
+  console.log(searchedColumn);
 
   if (isLoading) return <Loader />;
 

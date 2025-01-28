@@ -2,6 +2,7 @@ import Banner from "@/pages/Banner";
 import CarFAQ from "@/pages/CarFAQ";
 import Category from "@/pages/Category";
 import CustomParallax from "@/pages/CustomParallax";
+import Featured from "@/pages/Featured";
 import NewsSection from "@/pages/NewsSection";
 import Product from "@/pages/Product";
 import Review from "@/pages/Review";
@@ -12,12 +13,16 @@ const Home = () => {
     <div>
       <Banner />
       <Category />
+      <Featured />
+      <div className="my-4">
+        <Trusted />
+      </div>
+
       <Product />
-      <Trusted />
       <CarFAQ />
       <CustomParallax />
       <NewsSection />
-      <Review/>
+      <Review />
     </div>
   );
 };

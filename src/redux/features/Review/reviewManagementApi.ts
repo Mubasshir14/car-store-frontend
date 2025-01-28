@@ -17,8 +17,14 @@ const reviewManagementApi = baseApi.injectEndpoints({
       }),
       providesTags: ["review"],
     }),
+    getSingleReview: builder.query({
+      query: (id) => ({
+        url: `/review/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["review"],
+    }),
   }),
 });
 
-export const { useAddReviewMutation, useGetReviewQuery } =
-  reviewManagementApi;
+export const { useAddReviewMutation, useGetReviewQuery, useGetSingleReviewQuery } = reviewManagementApi;

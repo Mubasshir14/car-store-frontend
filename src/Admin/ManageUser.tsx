@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Table, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useGetUserQuery } from "@/redux/features/Admin/userManagementApi";
@@ -16,14 +15,16 @@ const ManageUser: React.FC = () => {
   const { data: response, isLoading } = useGetUserQuery(undefined);
   const [searchText, setSearchText] = useState<string>("");
   const [searchedColumn, setSearchedColumn] = useState<string>("");
-
+  console.log(searchText, searchedColumn);
   const users: User[] =
-    response?.data?.map((user: { name: any; email: any; role: any; }, index: any) => ({
-      key: index,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-    })) || [];
+    response?.data?.map(
+      (user: { name: any; email: any; role: any }, index: any) => ({
+        key: index,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      })
+    ) || [];
 
   const handleSearch = (
     selectedKeys: string[],
@@ -85,7 +86,7 @@ const ManageUser: React.FC = () => {
         : "",
   });
 
-  const columns : any = [
+  const columns: any = [
     {
       title: "Name",
       dataIndex: "name",
@@ -100,9 +101,7 @@ const ManageUser: React.FC = () => {
       dataIndex: "email",
       key: "email",
       ...getColumnSearchProps("email"),
-      render: (text: string) => (
-        <span className="font-bold ">{text}</span>
-      ),
+      render: (text: string) => <span className="font-bold ">{text}</span>,
     },
     {
       title: "Role",

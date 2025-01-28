@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetAProductQuery } from "@/redux/features/Admin/productManagement.api";
-import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft, Minus, Plus, ShoppingCart, Star } from "lucide-react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import Loader from "./Loader";
@@ -14,9 +14,8 @@ import { useAddCartMutation } from "@/redux/features/Cart/cartApi";
 import { toast } from "sonner";
 import {
   useAddReviewMutation,
+  useGetSingleReviewQuery,
 } from "@/redux/features/Review/reviewManagementApi";
-import Review from "./Review";
-
 
 const ProductDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,11 +27,12 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const [q, setQ] = useState(1);
   const [activeTab, setActiveTab] = useState("product-details");
-  const { data: car, isLoading } = useGetAProductQuery(id,);
+  const { data: car, isLoading } = useGetAProductQuery(id);
   const [addReview] = useAddReviewMutation(undefined);
+  const { data: singleReview } = useGetSingleReviewQuery(id);
+  const review = singleReview?.data?.[0];
   const user = useAppSelector(useCurrentUser);
   const [addCart] = useAddCartMutation();
-  console.log(user);
   const { data: newUser } = useGetMeQuery({
     email: user?.email,
     role: user?.role,
@@ -41,6 +41,7 @@ const ProductDetails = () => {
   if (isLoading) return <Loader />;
 
   const handleAddToCart = async () => {
+    const toastId = "addCartToast";
     if (user) {
       const cartItem = {
         car: car?.data._id,
@@ -67,9 +68,13 @@ const ProductDetails = () => {
       try {
         const response = await addCart(cartItem).unwrap();
         console.log("Cart item added successfully:", response);
-        toast.success("Item added to cart successfully!");
+        toast.success("Item added to cart successfully!", {
+          id: toastId,
+        });
       } catch (error) {
-        toast.error("Failed to add item to cart. Please try again.");
+        toast.error("Failed to add item to cart. Please try again.", {
+          id: toastId,
+        });
       }
     }
   };
@@ -263,9 +268,59 @@ const ProductDetails = () => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
-            {/* <Review showTitle={false} /> */}
-            </div>
+            {review?.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
+                <div key={review?._id} className="px-4">
+                  <div className="bg-white rounded-xl shadow-lg p-6 h-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    <div className="flex items-center gap-4 mb-6">
+                      <img
+                        src={review?.image}
+                        alt={`${review?.name}'s profile`}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-gray-100"
+                      />
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-800">
+                          {review?.name}
+                        </h3>
+                        <p className="text-sm text-gray-500">{review?.model}</p>
+                        <div className="flex items-center gap-1 mt-2">
+                          {[...Array(5)].map((_, index) => (
+                            <Star
+                              key={index}
+                              className={`w-4 h-4 ${
+                                index < review?.rating
+                                  ? "fill-yellow-400 text-yellow-400"
+                                  : "fill-gray-200 text-gray-200"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-600 mb-4 line-clamp-4">
+                      {review?.reviewText}
+                    </p>
+
+                    <div className="text-right">
+                      <p className="text-sm text-gray-400">
+                        {new Date(review?.createdAt).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              " "
+            )}
+
             <div className="flex justify-end">
               <button
                 onClick={openModal}

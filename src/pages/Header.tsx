@@ -3,7 +3,8 @@ import Navbar from "./Navbar";
 
 const Header = () => {
   return (
-    <div id='nav'  className="sticky top-0 z-50 ">
+    // 
+    <div id='nav'  className="sticky top-0 z-50">
       {/* Top Bar */}
       <div className="bg-red-600 text-white py-2 md:block hidden">
         <div className="container mx-auto flex items-center justify-between text-sm">

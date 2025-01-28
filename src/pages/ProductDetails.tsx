@@ -42,6 +42,11 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     const toastId = "addCartToast";
+    if (!user) {
+      toast.error("Please log in to add items to the cart.", {
+        id: toastId,
+      });
+    }
     if (user) {
       const cartItem = {
         car: car?.data._id,

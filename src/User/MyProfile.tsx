@@ -28,7 +28,7 @@ const MyProfile = () => {
     try {
       dispatch(logout());
       toast.success("Successfully logged out!");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error("Error logging out", error);
       toast.error("An error occurred while logging out. Please try again.");

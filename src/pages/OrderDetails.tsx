@@ -48,7 +48,7 @@ const OrderDetails = () => {
             <Descriptions.Item label="Transaction ID">
               {transaction?.id}
             </Descriptions.Item>
-            <Descriptions.Item label="Bank Status">
+            {/* <Descriptions.Item label="Bank Status">
               {transaction?.bank_status}
             </Descriptions.Item>
             <Descriptions.Item label="Date & Time">
@@ -62,7 +62,7 @@ const OrderDetails = () => {
             </Descriptions.Item>
             <Descriptions.Item label="SP Message">
               {transaction?.sp_message}
-            </Descriptions.Item>
+            </Descriptions.Item> */}
           </Descriptions>
         </Card>
 

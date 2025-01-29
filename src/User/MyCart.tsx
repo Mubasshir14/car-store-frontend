@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FaTrashAlt } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   useDeleteCartMutation,
   useGetCartQuery,
+  useUpdateCartMutation,
 } from "@/redux/features/Cart/cartApi";
 import { toast } from "sonner";
 import Loader from "@/pages/Loader";
@@ -19,6 +20,7 @@ const MyCart = () => {
   const { data: cart, isLoading } = useGetCartQuery(undefined);
   const [deleteCart] = useDeleteCartMutation();
   const [createOrder] = useAddOrderMutation();
+  const [updateCart] = useUpdateCartMutation();
   const user = useAppSelector(useCurrentUser);
   const { data: newUser } = useGetMeQuery({
     email: user?.email,
@@ -35,6 +37,26 @@ const MyCart = () => {
     )
     .toFixed(2);
 
+  const handleQuantityUpdate = async (id: string, newQuantity: number) => {
+    console.log(id);
+    const toastId = "cartToast";
+    if (newQuantity < 1) return;
+
+    try {
+      await updateCart({
+        id: id,
+        data: { quantity: newQuantity },
+      }).unwrap();
+      toast.success("Cart Quantity updated successfully", {
+        id: toastId,
+      });
+    } catch (error) {
+      toast.error("Failed to update quantity", {
+        id: toastId,
+      });
+    }
+  };
+
   const handleDelete = (itemId: string) => {
     const toastId = "deleteCartToast";
     Modal.confirm({
@@ -46,11 +68,11 @@ const MyCart = () => {
         try {
           await deleteCart(itemId).unwrap();
           toast.success("Removed from cart", {
-            id: toastId
+            id: toastId,
           });
         } catch (error) {
           toast.error("Something went wrong", {
-            id: toastId
+            id: toastId,
           });
         }
       },
@@ -62,7 +84,7 @@ const MyCart = () => {
 
   const handlePlaceOrder = async () => {
     try {
-      setIsProcessing(true); 
+      setIsProcessing(true);
       console.log("Cart data:", cart?.data);
       const orderPayload = {
         cars: cart?.data?.map(
@@ -162,9 +184,35 @@ const MyCart = () => {
                   </div>
                   <div className="mt-4">
                     <div className="flex flex-col lg:flex-row gap-4">
-                      <span className="text-red-500 font-semibold">
-                        Quantity: {c.quantity}
-                      </span>
+                      <div className="flex items-center gap-4">
+                        <span className="text-red-500 font-semibold">
+                          Quantity:
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() =>
+                              handleQuantityUpdate(c._id, c.quantity - 1)
+                            }
+                            disabled={c.quantity <= 1}
+                            className={`p-1 rounded ${
+                              c.quantity <= 1
+                                ? "bg-gray-300 cursor-not-allowed"
+                                : "bg-red-500 hover:bg-red-600 text-white"
+                            }`}
+                          >
+                            <FaMinus size={12} />
+                          </button>
+                          <span className="w-8 text-center">{c.quantity}</span>
+                          <button
+                            onClick={() =>
+                              handleQuantityUpdate(c._id, c.quantity + 1)
+                            }
+                            className="p-1 rounded bg-red-500 hover:bg-red-600 text-white"
+                          >
+                            <FaPlus size={12} />
+                          </button>
+                        </div>
+                      </div>
                       <span className="text-red-500 font-semibold">
                         Price: ${(c.price * c.quantity).toFixed(0)}
                       </span>
@@ -204,7 +252,6 @@ const MyCart = () => {
             </div>
             <button
               onClick={handlePlaceOrder}
-              // to="/checkout"
               className="w-full bg-red-500 text-white py-3 px-4 rounded-md font-semibold text-center hover:bg-red-600 transition duration-200"
             >
               Checkout ➔

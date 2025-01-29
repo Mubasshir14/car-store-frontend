@@ -20,7 +20,7 @@ const MyOrders = () => {
   });
 
   const pendingOrders = sortedOrders?.filter(
-    (order: any) => order.status === "Paid"
+    (order: any) => order.status === "Paid" || "Pending"
   );
 
   const columns = [
@@ -107,7 +107,7 @@ const MyOrders = () => {
     },
   ];
 
-  // Format data for the table
+
   const dataSource = pendingOrders?.map((order: any) => ({
     key: order._id,
     customerName: order.user.name,

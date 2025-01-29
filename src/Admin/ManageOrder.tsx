@@ -47,7 +47,7 @@ const ManageOrder = () => {
         return "default";
     }
   };
-
+console.log(getStatusColor);
   const getOrderStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "pending":
@@ -126,18 +126,18 @@ const ManageOrder = () => {
         />
       ),
     },
-    {
-      title: "Payment Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status: string) => (
-        <Badge
-          className="px-3 py-1 rounded-full"
-          color={getStatusColor(status)}
-          text={status}
-        />
-      ),
-    },
+    // {
+    //   title: "Payment Status",
+    //   dataIndex: "status",
+    //   key: "status",
+    //   render: (status: string) => (
+    //     <Badge
+    //       className="px-3 py-1 rounded-full"
+    //       color={getStatusColor(status)}
+    //       text={status}
+    //     />
+    //   ),
+    // },
     {
       title: "Action",
       key: "action",

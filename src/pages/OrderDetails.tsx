@@ -30,7 +30,7 @@ const OrderDetails = () => {
   } = order?.data || {};
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-6 px-4">
+    <div className="max-w-screen-xl mx-auto py-6 px-4">
       <div className="order-details">
         <Title level={2} className="text-center text-red-500 font-bold mb-6">
           Order Details

@@ -56,7 +56,7 @@ const OrderVerification = () => {
   };
 
   const pendingOrders = order?.data?.filter(
-    (order: any) => order.status === "Pending"
+    (order: any) => order?.status === "Pending"
   );
 
   if (isLoading) return <Loader />;
@@ -78,7 +78,7 @@ const OrderVerification = () => {
         <div className="space-y-8">
           {pendingOrders?.map((order: any) => (
             <div
-              key={order._id as string}
+              key={order?._id as string}
               className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
             >
               <div className="p-6">
@@ -93,11 +93,11 @@ const OrderVerification = () => {
                       <dl className="grid grid-cols-2 gap-3">
                         <dt className="text-gray-600">Order ID:</dt>
                         <dd className="font-mono text-sm">
-                          {order._id as string}
+                          {order?._id as string}
                         </dd>
                         <dt className="text-gray-600">Amount:</dt>
                         <dd className="font-bold text-green-600">
-                          ${order.totalPrice.toFixed(2)}
+                          ${order?.totalPrice.toFixed(2)}
                         </dd>
                         <dt className="text-gray-600">Status:</dt>
                         <dd>
@@ -105,13 +105,13 @@ const OrderVerification = () => {
                             variant="destructive"
                             className="animate-pulse"
                           >
-                            {order.status}
+                            {order?.status}
                           </Badge>
                         </dd>
                         <dt className="text-gray-600">Date:</dt>
                         <dd className="flex items-center gap-2">
                           <Clock className="h-4 w-4 text-gray-400" />
-                          {new Date(order.createdAt).toLocaleString()}
+                          {new Date(order?.createdAt).toLocaleString()}
                         </dd>
                       </dl>
                     </CardContent>
@@ -127,11 +127,11 @@ const OrderVerification = () => {
                       <dl className="grid grid-cols-2 gap-3">
                         <dt className="text-gray-600">Transaction ID:</dt>
                         <dd className="font-mono text-sm">
-                          {order.transaction.id}
+                          {order?.transaction?.id}
                         </dd>
                         <dt className="text-gray-600">Transaction Status:</dt>
                         <dd className="font-medium text-blue-600">
-                          {order.transaction.transactionStatus}
+                          {order?.transaction?.transactionStatus}
                         </dd>
                       </dl>
                     </CardContent>
@@ -146,16 +146,16 @@ const OrderVerification = () => {
                     <CardContent>
                       <dl className="grid grid-cols-2 gap-3">
                         <dt className="text-gray-600">Name:</dt>
-                        <dd className="font-medium">{order.user.name}</dd>
+                        <dd className="font-medium">{order?.user?.name}</dd>
                         <dt className="text-gray-600">Email:</dt>
                         <dd className="text-sm text-blue-600">
-                          {order.user.email}
+                          {order?.user?.email}
                         </dd>
                         <dt className="text-gray-600">Phone:</dt>
-                        <dd>{order.user.phone}</dd>
+                        <dd>{order?.user?.phone}</dd>
                         <dt className="text-gray-600">Location:</dt>
                         <dd className="text-sm">
-                          {order.user.address}, {order.user.city}
+                          {order?.user?.address}, {order?.user?.city}
                         </dd>
                       </dl>
                     </CardContent>
@@ -176,7 +176,7 @@ const OrderVerification = () => {
                         </div>
                         <Button
                           onClick={() =>
-                            handleVerify(order.transaction.id as string)
+                            handleVerify(order?.transaction.id as string)
                           }
                           className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
                         >

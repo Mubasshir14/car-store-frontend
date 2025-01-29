@@ -53,7 +53,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       );
       result = await baseQuery(args, api, extraOptions);
     } else {
-      toast.error("Session expired. Please log in again.", {
+      toast.error("You are not logged in. Please login.", {
         id: toastId,
       });
 

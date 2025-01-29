@@ -20,7 +20,7 @@ const MyOrders = () => {
   });
 
   const pendingOrders = sortedOrders?.filter(
-    (order: any) => order.status === "Paid" || "Pending"
+    (order: any) => order?.status === "Paid" || "Pending"
   );
 
   const columns = [
@@ -106,7 +106,6 @@ const MyOrders = () => {
       ),
     },
   ];
-
 
   const dataSource = pendingOrders?.map((order: any) => ({
     key: order._id,

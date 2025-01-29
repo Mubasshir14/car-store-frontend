@@ -78,7 +78,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+    <div className="flex items-center justify-center min-h-[500px] p-6 ">
       <Card className="w-full p-4 max-w-md shadow-md rounded-lg">
         <CardContent>
           <Tabs defaultValue="login" value={tab} onValueChange={setTab}>

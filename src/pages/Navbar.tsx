@@ -54,7 +54,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="max-w-screen-2xl mx-auto border-b-2 border-b-red-500 rounded-2xl">
+    <div className="max-w-screen-xl mx-auto border-b-2 border-b-red-500 rounded-2xl">
       <div className="sticky top-0 z-50">
         <nav
           className={`

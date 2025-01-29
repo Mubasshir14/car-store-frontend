@@ -7,7 +7,7 @@ const Header = () => {
     <div id='nav'  className="sticky top-0 z-50">
       {/* Top Bar */}
       <div className="bg-red-600 text-white py-2 md:block hidden">
-        <div className="container mx-auto flex items-center justify-between text-sm">
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between text-sm">
           {/* Contact Info */}
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">

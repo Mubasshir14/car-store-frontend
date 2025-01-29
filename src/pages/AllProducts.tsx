@@ -36,7 +36,7 @@ const AllProducts = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-screen-2xl mx-auto px-4 py-6 lg:py-10">
+      <div className="max-w-screen-xl mx-auto px-4 py-6 lg:py-10">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Responsive Sidebar */}
           <div className="w-full lg:w-1/4">
@@ -127,7 +127,7 @@ const AllProducts = () => {
             </h1>
 
             {/* Responsive Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-3 lg:gap-3">
               {products.map((product: TProducts, i: Key | null | undefined) => (
                 <ProductCard product={product} key={i} />
               ))}

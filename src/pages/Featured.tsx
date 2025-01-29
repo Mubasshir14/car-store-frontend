@@ -25,7 +25,7 @@ const Featured = () => {
   const randomNumber = Math.floor(Math.random() * 50) + 1;
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-10">
+    <div className="max-w-screen-xl mx-auto py-10">
       <h1 className="text-2xl uppercase text-center font-bold text-red-600 mb-6">
         Featured CARS
       </h1>

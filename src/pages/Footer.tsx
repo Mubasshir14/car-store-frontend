@@ -15,7 +15,7 @@ const Footer = () => {
   // };
   return (
     <footer className="bg-black text-white py-10">
-      <div className="max-w-screen-2xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+      <div className="max-w-screen-xl mx-auto px-4 grid md:grid-cols-3 gap-8">
         <div>
           <div className=" flex items-center gap-2">
             <Link to="/">

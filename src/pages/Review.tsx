@@ -45,7 +45,7 @@ const Review = ({ showTitle = true }: ReviewProps) => {
   };
 
   return (
-    <div className="max-w-screen-2xl mx-auto mb-14 px-4 relative">
+    <div className="max-w-screen-xl mx-auto mb-14 px-4 relative">
       {showTitle && (
         <h2 className="lg:text-3xl md:text-xl font-bold text-center mb-12 text-red-500">
           What Our Customers Say
@@ -88,7 +88,7 @@ const Review = ({ showTitle = true }: ReviewProps) => {
             createdAt: string | number | Date;
           }) => (
             <div key={review._id} className="px-4">
-              <div className="bg-white rounded-xl shadow-lg p-6 h-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="bg-white rounded-xl shadow-lg p-6 h-[250px] transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="flex items-center gap-4 mb-6">
                   <img
                     src={review.image}

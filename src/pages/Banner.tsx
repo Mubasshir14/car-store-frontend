@@ -7,7 +7,7 @@ import img5 from "../assets/carizon1.png";
 
 const Banner = () => {
   return (
-    <div className="max-w-screen-2xl mx-auto rounded-2xl">
+    <div className="max-w-screen-xl mx-auto rounded-2xl">
       <Carousel autoplay autoplaySpeed={1500} dots>
         <div>
           <img

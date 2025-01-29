@@ -7,7 +7,7 @@ import Navbar from '@/pages/Navbar';
 
 const DashBoard = () => {
     return (
-        <div className='max-w-screen-2xl mx-auto'>
+        <div className='max-w-screen-xl mx-auto'>
          <div >
          <Navbar/>
          </div>

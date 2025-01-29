@@ -10,7 +10,7 @@ import Trusted from "@/pages/Trusted";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <Banner />
       <Category />
       <Featured />

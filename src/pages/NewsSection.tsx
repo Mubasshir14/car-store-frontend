@@ -42,7 +42,7 @@ const NewsSection = () => {
 
   return (
     <div id='news' className="b py-16">
-      <div className="max-w-screen-2xl mx-auto px-4">
+      <div className="max-w-screen-xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="lg:text-3xl md:text-2xl text-2xl font-bold text-red-600 mb-4">Latest News & Updates</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

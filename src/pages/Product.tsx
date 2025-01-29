@@ -15,7 +15,7 @@ const Product = () => {
   const visibleProducts = products.slice(0, visibleCount);
 
   return (
-    <div id="product" className="max-w-screen-2xl mx-auto py-10">
+    <div id="product" className="max-w-screen-xl mx-auto py-10">
       <h1 className="text-2xl uppercase text-center font-bold text-red-600 mb-6">
         CARS
       </h1>

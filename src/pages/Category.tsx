@@ -27,7 +27,7 @@ const carBrands = [
 
 const Category = () => {
   return (
-    <div id='brand' className="max-w-screen-2xl mx-auto my-10 px-4">
+    <div id='brand' className="max-w-screen-xl mx-auto my-10 px-4">
       <h2 className="text-2xl uppercase text-center font-bold text-red-600 mb-6">
         Find Your Car by Brand
       </h2>

@@ -48,7 +48,7 @@ const CarFAQ = () => {
   ];
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-6 py-12">
+    <div className="max-w-screen-xl mx-auto px-6 py-12">
       <div className="grid md:grid-cols-2 gap-8">
         {/* Left Side: Image Gallery */}
         <div className="relative hidden md:flex flex-col justify-center items-center space-y-6 p-6">

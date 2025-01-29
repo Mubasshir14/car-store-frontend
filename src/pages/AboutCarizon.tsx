@@ -36,8 +36,8 @@ const AboutUsCarizon = () => {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="max-w-screen-2xl mx-auto px-4 py-16 space-y-16">
+    <div className=" min-h-screen">
+      <div className="max-w-screen-xl mx-auto px-4 py-16 space-y-16">
         {/* Hero Section */}
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
